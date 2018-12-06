@@ -8,7 +8,11 @@ const commentSchema = mongoose.Schema({content: String});
 const blogPostSchema = mongoose.Schema({
   title: {type: String, required: true},
   content: {type: String},
-  author: { type: mongoose.Schema.Types.ObjectId, ref: 'Author' },
+  author: {
+    firstName: String,
+    lastName: String
+  },
+  // author: { type: mongoose.Schema.Types.ObjectId, ref: 'Author' },
   comments: [ commentSchema ],
   created: {type: Date, default: Date.now}
 });
@@ -21,12 +25,12 @@ const authorSchema = mongoose.Schema({
 
 
 blogPostSchema.pre('findOne', function(next) {
-  this.populate('author');
+  //this.populate('author');
   next();
 });
 
 blogPostSchema.pre('find', function(next) {
-  this.populate('author');
+  //this.populate('author');
   next();
 });
 
